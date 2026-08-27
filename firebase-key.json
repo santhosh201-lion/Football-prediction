@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "tournament-predictor-e2a4e",
+  "private_key_id": "749eef0edfe9e5a892a755bb70fb428a72460b92",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCqyjRuu5XpOfBu\noKo3JAoYY555WFA/r5SzLVkoGPmXdSzHg8SBdmcb6KpQNMP7JhXCp2cjSml5KMTo\nZtkbThcHTqMGttrAImgiUlo//KgYMiP9QD2ZHcCaYu3QgSXeCZOiWolbpkbH45Hl\nYiahCLERD821ytd83gWXdXSqOXtcjwjsC6LjaX/gyE3c0KMeQL13o500K+XLv7Um\nU7GzUSDlatX4V/36PDqXJpBm0SVdIChloihwusPSn2qN4SOscqc9tAaLohiTmBJm\nE1638Hnl9nNg3POGu8Bz9sbA6o3nA3t4/ciRWc8vikza5ecD9I4TCHsToDWekebk\nwf9fHUH9AgMBAAECggEACI1S2M9N2hLg+458rNbXe+cpHVG9xaKeIzwRwH9CUuzh\neXrF++buPNMxYWNzA4AhtiXkdTuZp8vR0wKrZmxKR5RkIhxFPI+8f9N4hMcQXRMj\nAuBqSouB2c6QXVDKO6G7zHUUzGEOyZ2XRabc4P1qwxGehGGMLsrTTtqTz/Ohk2iF\nMzQ69o/6fBP2d85RS6FhpqcxzzJBKtDE1H9toQ19fmk8AJpQPW/clYwAgg+N5M2e\n9OQd+3QTzfCNzJDTdQ6tJNqRd84KCDFXIkNjfGXDqDSNuvYuaT1neZNgTHfxa11c\nQXYC73xy1q+AcVIQ8oBrW8M8R/2NHXSxbnpAFbah5QKBgQDZci4UgpW57IBS8gaZ\nx2wtCokwTKCb4tb2xsK2+vo6UY0gcwctyZLA1SNEkHtw69eazVJtjIuDJeYV9ui1\n2TTEj6ePcLal3L2FNVo6GkymnkSKytVqBcrvPI4BUIlNQceEbnfUFFqGPo92ASUZ\nnw4W1YGXL5zX7c0NGxWwx/Y+4wKBgQDJElBSETyJLkJSJj+35tWbvBzOv9vECmfz\nw0SSkPzPPAyIyD+3KyrdeUM7wzER8pUZS59py5tnut4efnqSjPHw3Lh577cQj4i4\ncDU5H3Qhp9Z5TgitnXRWP+XbD0QCAY/utUOxwGtNYJxBlLoz4T6F5FDuMj5OgRF9\nkVLCuQ5xnwKBgQCe9FzDGYKiW0SjXdF9cM6fTmhjKmDuE7DYzQth/64UG7Fy2yOQ\nUR46YJRbdtMGBSGjRBzRgEAsKvQ7cjdDV/i/B9SRgu/B58+TJSFEAB2wX1nzq7q+\numVS5Y1ZYKo+E6vqH2bxXb+fCvSMauHYDPGbt4/4GRIqtueCgR4mEMbtyQKBgDHU\nEQWVcewJA7R5+BZp5Qu3/WebEiot7f7xqB+uQIhWuEB5Z5jL4M6Ly4aW46Uv+ZUQ\nMYw1Qejd3UevTk7dEOQAvtKw/ivjdh1G6VmjmtLwVe0v0mS7/WWWZi74RIE+w92D\nHCiDp9PAGlkCM3bB3g2uPAQbfWdVAvGcPuc0lwi/AoGBAMtQpmTQC5nDpbzODEGC\nBh/mlpcOl1NPC8AeXbzQPwB2Yz9Nb5F+EAoHjnRfie0UT6ldUcxi4EOeONVR8XCv\nXuWNSV8Zy5mpkLy0f4Wfs9jiOoHtOk740Iv9Zjae0KXpzLF2h25oxx9KW9dL4n2i\n6w14u75pOFyf9E8a8DuQrWiU\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-fbsvc@tournament-predictor-e2a4e.iam.gserviceaccount.com",
+  "client_id": "111196663183223541911",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40tournament-predictor-e2a4e.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
