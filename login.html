@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #8ec2cf, #2575fc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      width: 350px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .input-group input {
+      width: 88%;
+      padding: 12px 40px 12px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .input-group input:focus {
+      border-color: #2575fc;
+      box-shadow: 0 0 5px rgba(37,117,252,0.5);
+    }
+    .input-group i {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+    }
+    .login-container button {
+      width: 100%;
+      padding: 12px;
+      background: #2575fc;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .login-container button:hover {
+      background: #1a5edb;
+      transform: scale(1.03);
+    }
+    #resetPassword {
+      display: block;
+      margin-top: 14px;
+      text-align: center;
+      color: #2575fc;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    #resetPassword:hover {
+      color: #6a11cb;
+    }
+    p {
+      text-align: center;
+      margin-top: 20px;
+    }
+    p a {
+      color: #2575fc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    p a:hover {
+      text-decoration: underline;
+    }
+    #loginResult {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+      color: #d9534f;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+  <!-- Font Awesome for icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Welcome Back</h2>
+    <form id="loginForm">
+      <div class="input-group">
+        <input type="email" id="email" placeholder="Enter Email" required>
+        <i class="fas fa-envelope"></i>
+      </div>
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Enter Password" required>
+        <i class="fas fa-lock"></i>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <div id="loginResult"></div>
+    <a id="resetPassword">Forgot password?</a>
+    <p>New here? <a href="signup.html">Create an account</a></p>
+  </div>
+
+  <!-- Firebase v8 SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="firebase-config.js"></script>
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const result = document.getElementById("loginResult");
+
+      try {
+        const userCredential = await auth.signInWithEmailAndPassword(email, password);
+        const idToken = await userCredential.user.getIdToken();
+        localStorage.setItem("token", idToken);
+        localStorage.setItem("userName", userCredential.user.displayName || email.split("@")[0]);
+        result.style.color = "green";
+        result.innerText = "Login successful!";
+        setTimeout(() => window.location.href = "index.html", 1000);
+      } catch (error) {
+        result.style.color = "#d9534f";
+        result.innerText = error.code === "auth/api-key-not-valid"
+          ? "Firebase configuration error: invalid Web API key."
+          : error.code === "auth/network-request-failed"
+          ? "Network error. Please check your connection."
+          : error.code === "auth/invalid-credential" ||
+            error.code === "auth/user-not-found" ||
+            error.code === "auth/wrong-password"
+          ? "Incorrect email or password."
+          : error.message;
+      }
+    });
+
+    document.getElementById("resetPassword").addEventListener("click", async () => {
+      const email = document.getElementById("email").value.trim();
+      const result = document.getElementById("loginResult");
+
+      if (!email) {
+        result.style.color = "#d9534f";
+        result.innerText = "Enter your email address first.";
+        return;
+      }
+
+      try {
+        await auth.sendPasswordResetEmail(email);
+        result.style.color = "green";
+        result.innerText = "Password reset email sent. Check your inbox.";
+      } catch (error) {
+        result.style.color = "#d9534f";
+        result.innerText = error.code === "auth/user-not-found"
+          ? "No account found for that email."
+          : error.message;
+      }
+    });
+  </script>
+</body>
+</html>

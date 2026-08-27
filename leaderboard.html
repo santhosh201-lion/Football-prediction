@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leaderboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="leaderboard-page">
+  <header class="topbar">
+    <h1>Leaderboard</h1>
+    <button class="back-button" onclick="window.location.href='index.html'">
+      ← Back to Predictions
+    </button>
+  </header>
+
+  <div class="leaderboard-card">
+    <p class="hint">Highest scores appear first.</p>
+    <div id="leaderboardContainer">
+      <p>Loading leaderboard...</p>
+    </div>
+  </div>
+
+  <script src="leaderboard.js"></script>
+</body>
+</html>

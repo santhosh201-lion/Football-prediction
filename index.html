@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bracket Prediction</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="script.js"></script>
+</head>
+<body>
+  <header class="topbar">
+  <h1 class="title">Bracket Prediction</h1>
+      <div>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Sign up</a>
+      <button class="logout-button" onclick="logoutUser()">Logout</button>
+      <button class="leaderboard-button" onclick="openLeaderboardPage()">Leaderboard</button>
+    </div>
+  </header>
+
+
+  <div class="bracket tree">
+    <div class="column">
+      <div class="column-title">Round of 16</div>
+      <div class="match" id="m1">
+        <button class="team-button" id="m1-t1" onclick="selectTeam('m1', 'Manchester City')">Manchester City</button>
+        <button class="team-button" id="m1-t2" onclick="selectTeam('m1', 'Real Madrid')">Real Madrid</button>
+      </div>
+      <div class="match" id="m2">
+        <button class="team-button" id="m2-t1" onclick="selectTeam('m2', 'Barcelona')">Barcelona</button>
+        <button class="team-button" id="m2-t2" onclick="selectTeam('m2', 'Liverpool')">Liverpool</button>
+      </div>
+      <div class="match " id="m3">
+        <button class="team-button" id="m3-t1" onclick="selectTeam('m3', 'Arsenal')">Arsenal</button>
+        <button class="team-button" id="m3-t2" onclick="selectTeam('m3', 'Chelsea')">Chelsea</button>
+      </div>
+      <div class="match " id="m4">
+        <button class="team-button" id="m4-t1" onclick="selectTeam('m4', 'Manchester United')">Manchester United</button>
+        <button class="team-button" id="m4-t2" onclick="selectTeam('m4', 'Tottenham Hotspur')">Tottenham Hotspur</button>
+      </div>
+       <div class="match " id="m5">
+        <button class="team-button" id="m5-t1" onclick="selectTeam('m5', 'Bayern Munich')">Bayern Munich</button>
+        <button class="team-button" id="m5-t2" onclick="selectTeam('m5', 'Borussia Dortmund')">Borussia Dortmund</button>
+      </div>
+       <div class="match " id="m6">
+        <button class="team-button" id="m6-t1" onclick="selectTeam('m6', 'RB Leipzig')">RB Leipzig</button>
+        <button class="team-button" id="m6-t2" onclick="selectTeam('m6', 'Bayer Leverkusen')">Bayer Leverkusen</button>
+      </div>
+       <div class="match " id="m7">
+        <button class="team-button" id="m7-t1" onclick="selectTeam('m7', 'Paris Saint-Germain')">Paris Saint-Germain</button>
+        <button class="team-button" id="m7-t2" onclick="selectTeam('m7', 'Olympique Marseille')">Olympique Marseille</button>
+      </div>
+       <div class="match " id="m8">
+        <button class="team-button" id="m8-t1" onclick="selectTeam('m8', 'Inter Milan')">Inter Milan</button>
+        <button class="team-button" id="m8-t2" onclick="selectTeam('m8', 'AC Milan')">AC Milan</button>
+      </div>
+    </div>
+
+    <!-- QUARTERFINALS -->
+<div class="column">
+    <div class="column-title">Quarterfinals</div>
+
+    <div class="match sf first" id="qf1">
+        <button class="team-button"
+                id="qf1-t1"
+                onclick="selectTeam('qf1', this.innerText)">
+            Winner Match 1
+        </button>
+
+        <button class="team-button"
+                id="qf1-t2"
+                onclick="selectTeam('qf1', this.innerText)">
+            Winner Match 2
+        </button>
+    </div>
+
+    <div class="match sf second" id="qf2">
+        <button class="team-button"
+                id="qf2-t1"
+                onclick="selectTeam('qf2', this.innerText)">
+            Winner Match 3
+        </button>
+
+        <button class="team-button"
+                id="qf2-t2"
+                onclick="selectTeam('qf2', this.innerText)">
+            Winner Match 4
+        </button>
+    </div>
+
+    <div class="match sf third" id="qf3">
+        <button class="team-button"
+                id="qf3-t1"
+                onclick="selectTeam('qf3', this.innerText)">
+            Winner Match 5
+        </button>
+
+        <button class="team-button"
+                id="qf3-t2"
+                onclick="selectTeam('qf3', this.innerText)">
+            Winner Match 6
+        </button>
+    </div>
+
+    <div class="match sf fourth" id="qf4">
+        <button class="team-button"
+                id="qf4-t1"
+                onclick="selectTeam('qf4', this.innerText)">
+            Winner Match 7
+        </button>
+
+        <button class="team-button"
+                id="qf4-t2"
+                onclick="selectTeam('qf4', this.innerText)">
+            Winner Match 8
+        </button>
+    </div>
+</div>
+
+
+<!-- SEMI FINALS -->
+<div class="column">
+    <div class="column-title">Semi Finals</div>
+
+    <div class="match final first" id="sf1">
+        <button class="team-button"
+                id="sf1-t1"
+                onclick="selectTeam('sf1', this.innerText)">
+            Winner Quarter 1
+        </button>
+
+        <button class="team-button"
+                id="sf1-t2"
+                onclick="selectTeam('sf1', this.innerText)">
+            Winner Quarter 2
+        </button>
+    </div>
+
+    <div class="match final second" id="sf2">
+        <button class="team-button"
+                id="sf2-t1"
+                onclick="selectTeam('sf2', this.innerText)">
+            Winner Quarter 3
+        </button>
+
+        <button class="team-button"
+                id="sf2-t2"
+                onclick="selectTeam('sf2', this.innerText)">
+            Winner Quarter 4
+        </button>
+    </div>
+</div>
+
+
+<!-- FINAL -->
+<div class="column">
+    <div class="column-title">Final</div>
+
+    <div class="match championship" id="final">
+        <button class="team-button"
+                id="final-t1"
+                onclick="selectTeam('final', this.innerText)">
+            Winner Semi 1
+        </button>
+
+        <button class="team-button"
+                id="final-t2"
+                onclick="selectTeam('final', this.innerText)">
+            Winner Semi 2
+        </button>
+    </div>
+</div>
+
+  </div>
+
+  <div class="submit-section">
+    <button class="submit-button" onclick="submitBracket()">Submit Bracket</button>
+  </div>
+  <div id="result" class="result" role="status" aria-live="polite"></div>
+<br>
+  <div class="reset-bracket">
+    <button class="reset-button" onclick="resetBracket()">Reset Bracket</button>
+  </div>

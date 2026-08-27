@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .auth-container {
+      background: #fff;
+      padding: 40px 35px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      width: 360px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    .auth-container h2 {
+      margin-bottom: 25px;
+      color: #333;
+      font-weight: 600;
+    }
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .input-group {
+      position: relative;
+      width: 100%;
+    }
+    .input-group input {
+      width: 88%;
+      padding: 12px 40px 12px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.3s;
+      font-size: 14px;
+    }
+    .input-group input:focus {
+      border-color: #2575fc;
+      box-shadow: 0 0 5px rgba(37,117,252,0.5);
+    }
+    .input-group i {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+    }
+    .auth-container button {
+      width: 100%;
+      padding: 12px;
+      background: #2575fc;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .auth-container button:hover {
+      background: #1a5edb;
+      transform: scale(1.02);
+    }
+    .auth-container a {
+      margin-top: 16px;
+      text-align: center;
+      color: #2575fc;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .auth-container a:hover {
+      color: #6a11cb;
+      text-decoration: underline;
+    }
+    #signupResult {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 14px;
+      min-height: 18px;
+      color: #d9534f;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+  <!-- Font Awesome for icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="auth-container">
+    <h2>Create Account</h2>
+    <form id="signupForm">
+      <div class="input-group">
+        <input type="text" id="displayName" placeholder="User name" maxlength="50" required>
+        <i class="fas fa-user"></i>
+      </div>
+      <div class="input-group">
+        <input type="email" id="email" placeholder="Email" required>
+        <i class="fas fa-envelope"></i>
+      </div>
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Password" minlength="6" required>
+        <i class="fas fa-lock"></i>
+      </div>
+      <button type="submit">Sign Up</button>
+    </form>
+    <div id="signupResult"></div>
+    <a href="login.html">Already have an account? Log in</a>
+  </div>
+
+  <!-- Firebase v8 SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="firebase-config.js"></script>
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const result = document.getElementById("signupResult");
+      const displayName = document.getElementById("displayName").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      try {
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        await userCredential.user.updateProfile({ displayName });
+        await auth.signOut();
+        localStorage.removeItem("token");
+        localStorage.removeItem("userName");
+        result.style.color = "green";
+        result.innerText = "Account created successfully! Redirecting...";
+        setTimeout(() => window.location.href = "login.html", 1200);
+      } catch (error) {
+        result.style.color = "#d9534f";
+        if (error.code === "auth/api-key-not-valid") {
+          result.innerText = "Firebase configuration error: invalid Web API key.";
+        } else if (error.code === "auth/network-request-failed") {
+          result.innerText = "Network error. Please check your connection.";
+        } else if (error.code === "auth/operation-not-allowed") {
+          result.innerText = "Email/password sign-up is disabled in Firebase Authentication.";
+        } else if (error.code === "auth/email-already-in-use") {
+          result.innerText = "That email already has an account. Try logging in.";
+        } else {
+          result.innerText = error.message;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
